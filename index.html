@@ -77,3 +77,98 @@
 
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>موقع القرآن الكريم | أيوب</title>
+    <style>
+        /* تنسيق شكل الصفحة */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        /* حاوية المشغل */
+        .quran-container {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+        }
+
+        h1 { color: #2d5a27; font-size: 24px; margin-bottom: 10px; }
+        p { color: #666; margin-bottom: 25px; }
+
+        /* تنسيق مشغل الصوت */
+        audio {
+            width: 100%;
+            border-radius: 10px;
+            outline: none;
+        }
+
+        /* إضافة لمسة جمالية للأزرار */
+        .playlist {
+            margin-top: 20px;
+            text-align: right;
+        }
+
+        .surah-item {
+            background: #eef5ee;
+            padding: 10px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .surah-item:hover { background: #d4e8d4; }
+    </style>
+</head>
+<body>
+
+<div class="quran-container">
+    <h1>القرآن الكريم</h1>
+    <p>بصوت مشاهير القراء</p>
+
+    <!-- مشغل الصوت الرئيسي -->
+    <div id="player-title" style="font-weight: bold; margin-bottom: 10px; color: #2d5a27;">سورة الفاتحة - مشاري العفاسي</div>
+    <audio id="main-audio" controls>
+        <source src="https://server8.mp3quran.net" type="audio/mpeg">
+        متصفحك لا يدعم تشغيل الصوت.
+    </audio>
+
+    <!-- قائمة السور (يمكنك إضافة المزيد هنا) -->
+    <div class="playlist">
+        <div class="surah-item" onclick="playSurah('سورة الفاتحة - مشاري العفاسي', 'https://server8.mp3quran.net')">1. سورة الفاتحة</div>
+        <div class="surah-item" onclick="playSurah('سورة البقرة - مشاري العفاسي', 'https://server8.mp3quran.net')">2. سورة البقرة</div>
+        <div class="surah-item" onclick="playSurah('سورة الكهف - ماهر المعيقلي', 'https://server12.mp3quran.net')">18. سورة الكهف</div>
+    </div>
+</div>
+
+<script>
+    // وظيفة لتغيير السورة عند الضغط عليها
+    function playSurah(title, url) {
+        const audio = document.getElementById('main-audio');
+        const titleElement = document.getElementById('player-title');
+        
+        audio.src = url;
+        titleElement.innerText = title;
+        audio.play(); // تشغيل تلقائي عند الاختيار
+    }
+</script>
+
+</body>
+</html>
+
