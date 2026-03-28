@@ -2,17 +2,30 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>تجربة الصوت</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>موقع القرآن الكريم | أيوب</title>
+    <style>
+        body { font-family: sans-serif; background-color: #eceff1; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .card { background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center; width: 320px; }
+        h2 { color: #2e7d32; margin-bottom: 1rem; }
+        audio { width: 100%; margin-top: 10px; }
+        .status { font-size: 0.8rem; color: #666; margin-top: 10px; }
+    </style>
 </head>
 <body>
-    <h2>اضغط لتشغيل القرآن الكريم</h2>
+
+<div class="card">
+    <h2>القرآن الكريم</h2>
+    <p>سورة الفاتحة - المنشاوي</p>
     
-    <!-- رابط مباشر لسورة الفاتحة من سيرفر مستقر -->
-    <audio controls autoplay>
-        <source src="https://server8.mp3quran.net" type="audio/mpeg">
-        متصفحك يدعم هذا المشغل.
+    <!-- رابط مباشر ومستقر جداً بنظام HTTPS -->
+    <audio controls>
+        <source src="https://download.quranicaudio.com" type="audio/mpeg">
+        متصفحك لا يدعم تشغيل الصوت.
     </audio>
 
-    <p>إذا لم تسمع صوتاً، تأكد من أن هاتفك ليس في وضع "الصامت".</p>
+    <div class="status">إذا لم يعمل الصوت، اضغط على زر التشغيل (Play)</div>
+</div>
+
 </body>
 </html>
