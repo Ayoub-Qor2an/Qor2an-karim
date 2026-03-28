@@ -1,82 +1,4 @@
-<!DOCTYPE html>و
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <title>موقع القرآن الكريم - استماع</title>
-    <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center; background: #f4f7f6; padding: 20px; }
-        .container { max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 15px; shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        h1 { color: #2c3e50; }
-        .reciters-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px; margin-top: 20px; }
-        button { padding: 15px; border: none; border-radius: 8px; background: #27ae60; color: white; cursor: pointer; transition: 0.3s; font-size: 16px; }
-        button:hover { background: #219150; transform: translateY(-2px); }
-        .player-section { margin-top: 40px; padding: 20px; border-top: 2px solid #eee; }
-        audio { width: 100%; margin-top: 10px; }
-        #current-reciter { font-weight: bold; color: #27ae60; }
-    </style>
-</head>
-<body>
-
-<div class="container">
-    <h1>استمع للقرآن الكريم</h1>
-    <p>اختر القارئ للاستماع إلى سورة الفاتحة:</p>
-
-    <!-- شبكة الأزرار -->
-    <div id="reciters-list" class="reciters-grid">
-        <p>جاري تحميل القراء...</p>
-    </div>
-
-    <!-- مشغل الصوت -->
-    <div class="player-section">
-        <p>أنت تستمع الآن لـ: <span id="current-reciter">---</span></p>
-        <audio id="main-player" controls autoplay>
-            Your browser does not support the audio element.
-        </audio>
-    </div>
-</div>
-
-<script>
-    // قائمة ببعض القراء المشهورين (معرفاتهم في API)
-    const famousReciters = [
-        { id: 7, name: "مشاري العفاسي" },
-        { id: 10, name: "سعود الشريم" },
-        { id: 12, name: "عبد الباسط عبد الصمد" },
-        { id: 2, name: "عبد الرشيد صوفي" },
-        { id: 8, name: "ماهر المعيقلي" },
-        { id: 6, name: "أبو بكر الشاطري" }
-    ];
-
-    const listContainer = document.getElementById('reciters-list');
-    const audioPlayer = document.getElementById('main-player');
-    const reciterNameDisplay = document.getElementById('current-reciter');
-
-    // إنشاء الأزرار برمجياً
-    listContainer.innerHTML = ''; 
-    famousReciters.forEach(reciter => {
-        const btn = document.createElement('button');
-        btn.innerText = reciter.name;
-        btn.onclick = () => playQuran(reciter.id, reciter.name);
-        listContainer.appendChild(btn);
-    });
-
-    // وظيفة تشغيل الصوت (سورة الفاتحة رقم 1 كمثال)
-    async function playQuran(reciterId, name) {
-        // جلب رابط الصوت من API موقع Quran.com
-        const response = await fetch(`https://api.quran.com{reciterId}/1`);
-        const data = await response.json();
         
-        if(data.audio_file) {
-            audioPlayer.src = data.audio_file.audio_url;
-            reciterNameDisplay.innerText = name;
-            audioPlayer.play();
-        } else {
-            alert("عذراً، الملف الصوتي غير متوفر حالياً.");
-        }
-    }
-</script>
-
-</body>
-</html>
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -171,4 +93,3 @@
 
 </body>
 </html>
-
