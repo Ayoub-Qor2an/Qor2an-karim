@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -5,26 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>موقع القرآن الكريم | أيوب</title>
     <style>
-        body { font-family: sans-serif; background-color: #eceff1; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .card { background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center; width: 320px; }
-        h2 { color: #2e7d32; margin-bottom: 1rem; }
-        audio { width: 100%; margin-top: 10px; }
-        .status { font-size: 0.8rem; color: #666; margin-top: 10px; }
+        body { font-family: sans-serif; background-color: #f0f2f5; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        .container { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); text-align: center; width: 90%; max-width: 500px; }
+        h2 { color: #1a5d1a; margin-bottom: 20px; }
+        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 10px; background: #000; }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+        .footer { margin-top: 15px; font-size: 0.9rem; color: #666; }
     </style>
 </head>
 <body>
 
-<div class="card">
-    <h2>القرآن الكريم</h2>
-    <p>سورة الفاتحة - المنشاوي</p>
-    
-    <!-- رابط مباشر ومستقر جداً بنظام HTTPS -->
-    <audio controls>
-        <source src="https://download.quranicaudio.com" type="audio/mpeg">
-        متصفحك لا يدعم تشغيل الصوت.
-    </audio>
+<div class="container">
+    <h2>موقع القرآن الكريم - أيوب</h2>
+    <p>بصوت القارئ عبد الباسط عبد الصمد</p>
 
-    <div class="status">إذا لم يعمل الصوت، اضغط على زر التشغيل (Play)</div>
+    <!-- مشغل يوتيوب (سورة الفاتحة) - يعمل 100% -->
+    <div class="video-container">
+        <iframe src="https://www.youtube.com" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+    <div class="footer">اضغط على زر التشغيل في وسط الفيديو</div>
 </div>
 
 </body>
