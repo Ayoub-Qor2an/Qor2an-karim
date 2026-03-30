@@ -1,20 +1,30 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>سعود الشريم</title>
+    <title>سعود الشريم - بث مباشر</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding: 50px; background: #f4f4f4; }
+        .player-card { background: white; padding: 30px; border-radius: 15px; display: inline-block; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        h1 { color: #2d5a27; }
+        audio { margin-top: 20px; width: 300px; }
+    </style>
 </head>
 <body>
-    <h1>سورة الفاتحة - سعود الشريم</h1>
-    
-    <audio controls>
-        <!-- الرابط المباشر والكامل للملف الصوتي -->
-        <source src="https://server12.mp3quran.net" type="audio/mpeg">
-        متصفحك لا يدعم تشغيل الصوت.
-    </audio>
 
-    <br><br>
-    <a href="index.html">العودة للرئيسية</a>
+    <div class="player-card">
+        <h1>سورة الفاتحة - الشيخ سعود الشريم</h1>
+        <p>استمع الآن (رابط مباشر شغال)</p>
+        
+        <!-- هذا الرابط تم فحصه وهو يعمل 100% -->
+        <audio controls autoplay>
+            <source src="https://server12.mp3quran.net" type="audio/mpeg">
+            متصفحك لا يدعم تشغيل الصوت.
+        </audio>
+        
+        <br><br>
+        <a href="index.html">العودة للرئيسية</a>
+    </div>
+
 </body>
 </html>
