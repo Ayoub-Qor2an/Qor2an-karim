@@ -5,29 +5,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تلاوات سعود الشريم - المصحف الكامل</title>
     <style>
-        body { background-color: #121212; color: #ffffff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; padding-bottom: 150px; }
-        h1 { color: #ffd700; margin-bottom: 5px; text-align: center; }
-        .back-link { color: #bbb; text-decoration: none; margin-bottom: 20px; font-size: 0.9rem; }
-        .surah-list { width: 100%; max-width: 600px; display: flex; flex-direction: column; gap: 8px; }
-        .surah-item { 
-            background-color: #1e1e1e; padding: 12px 20px; border-radius: 8px; 
-            display: flex; justify-content: space-between; align-items: center; 
-            border: 1px solid #333; cursor: pointer; transition: 0.2s; 
+        body { 
+            background-color: #121212; 
+            color: #ffffff; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            margin: 0; 
+            padding: 20px; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            padding-bottom: 150px; 
         }
-        .surah-item:hover { background-color: #252525; border-color: #ffd700; transform: scale(1.01); }
-        .surah-name { font-weight: bold; }
-        .play-icon { color: #ffd700; }
+        h1 { color: #ffd700; margin-bottom: 5px; text-align: center; }
+        .back-link { color: #bbb; text-decoration: none; margin-bottom: 20px; font-size: 0.9rem; border-bottom: 1px solid #444; }
+        
+        .surah-list { 
+            width: 100%; 
+            max-width: 600px; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 10px; 
+        }
+        .surah-item { 
+            background-color: #1e1e1e; 
+            padding: 15px 20px; 
+            border-radius: 10px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border: 1px solid #333; 
+            cursor: pointer; 
+            transition: all 0.3s ease; 
+        }
+        .surah-item:hover { 
+            background-color: #2a2a2a; 
+            border-color: #ffd700; 
+            transform: translateY(-2px);
+        }
+        .surah-item.active {
+            border-color: #ffd700;
+            background-color: #252525;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+        }
+        .surah-name { font-weight: bold; font-size: 1.1rem; }
+        .play-icon { color: #ffd700; font-size: 1.2rem; }
 
         /* مشغل الصوت الثابت */
         .player-container {
-            position: fixed; bottom: 0; left: 0; width: 100%;
-            background-color: #1e1e1e; border-top: 2px solid #ffd700;
-            padding: 15px; display: flex; flex-direction: column; align-items: center;
-            box-shadow: 0 -5px 15px rgba(0,0,0,0.5);
+            position: fixed; 
+            bottom: 0; 
+            left: 0; 
+            width: 100%;
+            background-color: #1a1a1a; 
+            border-top: 3px solid #ffd700;
+            padding: 20px 10px; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center;
+            box-shadow: 0 -10px 25px rgba(0,0,0,0.7);
             z-index: 1000;
         }
-        audio { width: 90%; max-width: 500px; height: 45px; margin-top: 10px; }
-        #current-info { color: #ffd700; font-size: 1rem; font-weight: bold; margin-bottom: 5px; }
+        #current-info { 
+            color: #ffd700; 
+            font-size: 1.1rem; 
+            font-weight: bold; 
+            margin-bottom: 10px; 
+            text-shadow: 1px 1px 2px black;
+        }
+        audio { 
+            width: 95%; 
+            max-width: 600px; 
+            height: 45px; 
+        }
     </style>
 </head>
 <body>
@@ -36,12 +85,12 @@
     <a href="index.html" class="back-link">⬅ العودة للقائمة الرئيسية</a>
 
     <div id="surah-container" class="surah-list">
-        <!-- سيتم ملء القائمة بواسطة JS -->
+        <!-- سيتم ملء القائمة بواسطة JavaScript -->
     </div>
 
     <div class="player-container">
         <div id="current-info">اختر سورة للاستماع</div>
-        <audio id="main-player" controls>
+        <audio id="main-player" controls preload="auto">
             <source id="audio-source" src="" type="audio/mpeg">
             متصفحك لا يدعم تشغيل الصوت.
         </audio>
@@ -53,7 +102,7 @@
         ];
 
         const container = document.getElementById('surah-container');
-        // الرابط الصحيح لسيرفر الشيخ سعود الشريم
+        // الرابط الصحيح لسيرفر الشيخ سعود الشريم (المصحف المرتل)
         const baseUrl = "https://mp3quran.net"; 
 
         surahNames.forEach((name, index) => {
@@ -62,7 +111,8 @@
 
             const item = document.createElement('div');
             item.className = 'surah-item';
-            item.onclick = () => playSurah(audioUrl, name);
+            item.id = surah-${index};
+            item.onclick = () => playSurah(audioUrl, name, index);
             item.innerHTML = `
                 <span class="surah-name">${index + 1}. سورة ${name}</span>
                 <span class="play-icon">▶</span>
@@ -70,18 +120,27 @@
             container.appendChild(item);
         });
 
-        function playSurah(url, name) {
+        function playSurah(url, name, index) {
             const player = document.getElementById('main-player');
             const source = document.getElementById('audio-source');
             const info = document.getElementById('current-info');
 
+            // تمييز السورة المختارة بصرياً
+            document.querySelectorAll('.surah-item').forEach(el => el.classList.remove('active'));
+            document.getElementById(surah-${index}).classList.add('active');
+
+            // تحديث المصدر والتشغيل
             source.src = url;
             info.innerText = "جاري تشغيل: سورة " + name;
-            player.load(); // ضروري لتحميل المصدر الجديد
-            player.play().catch(e => {
-                console.error("فشل التشغيل:", e);
-                alert("تعذر تشغيل الصوت، تأكد من اتصالك بالإنترنت.");
-            });
+            player.load(); 
+            
+            // محاولة التشغيل مع معالجة خطأ "User Interaction"
+            const playPromise = player.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(error => {
+                    console.error("خطأ في التشغيل:", error);
+                });
+            }
         }
     </script>
 </body>
