@@ -6,7 +6,7 @@
     <title>تلاوات سعود الشريم - المصحف الكامل</title>
     <style>
         body { background-color: #121212; color: #ffffff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; padding-bottom: 120px; }
-        h1 { color: #ffd700; margin-bottom: 5px; }
+        h1 { color: #ffd700; margin-bottom: 5px; text-align: center; }
         .back-link { color: #bbb; text-decoration: none; margin-bottom: 20px; font-size: 0.9rem; }
         
         .surah-list { width: 100%; max-width: 600px; display: flex; flex-direction: column; gap: 8px; }
@@ -26,6 +26,7 @@
             background-color: #1e1e1e; border-top: 2px solid #ffd700;
             padding: 15px; display: flex; flex-direction: column; align-items: center;
             box-shadow: 0 -5px 15px rgba(0,0,0,0.5);
+            z-index: 1000;
         }
         audio { width: 90%; max-width: 500px; height: 40px; margin-top: 10px; }
         #current-info { color: #ffd700; font-size: 1rem; font-weight: bold; }
@@ -36,30 +37,51 @@
     <h1>القارئ سعود الشريم</h1>
     <a href="index.html" class="back-link">⬅ العودة للقائمة الرئيسية</a>
 
-    <!-- سيتم ملء هذه القائمة بواسطة JavaScript -->
-    <div id="surah-container" class="surah-list"></div>
+    <div id="surah-container" class="surah-list">
+        <!-- سيتم ملء هذه القائمة بواسطة JavaScript -->
+    </div>
 
     <div class="player-container">
         <div id="current-info">اختر سورة للاستماع</div>
-        <audio id="main-player" controls autoplay>
+        <audio id="main-player" controls>
             <source id="audio-source" src="" type="audio/mpeg">
+            متصفحك لا يدعم تشغيل الصوت.
         </audio>
     </div>
 
     <script>
-        // قائمة بأسماء السور بالترتيب
         const surahNames = [
             "الفاتحة", "البقرة", "آل عمران", "النساء", "المائدة", "الأنعام", "الأعراف", "الأنفال", "التوبة", "يونس", "هود", "يوسف", "الرعد", "إبراهيم", "الحجر", "النحل", "الإسراء", "الكهف", "مريم", "طه", "الأنبياء", "الحج", "المؤمنون", "النور", "الفرقان", "الشعراء", "النمل", "القصص", "العنكبوت", "الروم", "لقمان", "السجدة", "الأحزاب", "سبأ", "فاطر", "يس", "الصافات", "ص", "الزمر", "غافر", "فصلت", "الشورى", "الزخرف", "الدخان", "الجاثية", "الأحقاف", "محمد", "الفتح", "الحجرات", "ق", "الذاريات", "الطور", "النجم", "القمر", "الرحمن", "الواقعة", "الحديد", "المجادلة", "الحشر", "الممتحنة", "الصف", "الجمعة", "المنافقون", "التغابن", "الطلاق", "التحريم", "الملك", "القلم", "الحاقة", "المعارج", "نوح", "الجن", "المزمل", "المدثر", "القيامة", "الإنسان", "المرسلات", "النبأ", "النازعات", "عبس", "التكوير", "الانفطار", "المطففين", "الانشقاق", "البروج", "الطارق", "الأعلى", "الغاشية", "الفجر", "البلد", "الشمس", "الليل", "الضحى", "الشرح", "التين", "العلق", "القدر", "البينة", "الزلزلة", "العاديات", "القارعة", "التكاثر", "العصر", "الهمزة", "الفيل", "قريش", "الماعون", "الكوثر", "الكافرون", "النصر", "المسد", "الإخلاص", "الفلق", "الناس"
         ];
 
         const container = document.getElementById('surah-container');
+        const baseUrl = "https://mp3quran.net".replace("001.mp3", ""); // رابط سيرفر الشريم
 
-        // توليد القائمة برمجياً
         surahNames.forEach((name, index) => {
-            const surahNumber = (index + 1).toString().padStart(3, '0'); // يحول 1 إلى 001
-            const audioUrl = https://mp3quran.net{surahNumber}.mp3;
+            const surahNumber = (index + 1).toString().padStart(3, '0'); 
+            const audioUrl = ${baseUrl}${surahNumber}.mp3;
 
             const item = document.createElement('div');
             item.className = 'surah-item';
             item.onclick = () => playSurah(audioUrl, name);
- …
+            item.innerHTML = `
+                <span class="surah-name">${index + 1}. سورة ${name}</span>
+                <span class="play-icon">▶</span>
+            `;
+            container.appendChild(item);
+        });
+
+        function playSurah(url, name) {
+            const player = document.getElementById('main-player');
+            const source = document.getElementById('audio-source');
+            const info = document.getElementById('current-info');
+
+            source.src = url;
+            info.innerText = "جاري تشغيل: سورة " + name;
+            player.load();
+            player.play().catch(e => console.log("خطأ في التشغيل التلقائي:", e));
+        }
+    </script>
+
+</body>
+</html>
